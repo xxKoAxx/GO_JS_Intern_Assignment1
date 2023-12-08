@@ -1,0 +1,142 @@
+.card {
+    width: 300px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 28px !important;
+    background: radial-gradient(
+        ellipse at top left,
+        #f6c90e 20%,
+        transparent 20%
+    );
+    background-size: 100% 100%;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: radial-gradient(
+        ellipse at 900% 100%,
+        #f6c90e 75%,
+        transparent 75%
+    );
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+p{
+    font-size: 0.8em;
+}
+.card-body-wrapper::-webkit-scrollbar {
+    display: none;
+}
+.card-body-wrapper {
+    height: 300px; /* Set the desired fixed height for the cards */
+    overflow-y: auto; /* Enable vertical scrollbar if content exceeds the card height */
+}
+.card-body {
+    padding: 12px 28px;
+}
+.card-img-top {
+    border-radius: 28px !important;
+    overflow: hidden;
+    width: 100%;
+    transform: rotate(-30deg); /* Rotate the image by 45 degrees */
+}
+
+.shoe-detail-container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.shoe-cart-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.product-details {
+    margin-top: 15px;
+}
+.card-title {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.shoe-name {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.price-tag{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.total-count{
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 20px;
+}
+.btn.add-to-cart-btn {
+    background-color: #f6c90e;
+    border-color: #f6c90e;
+    color: black;
+    font-weight: bold;
+    border-radius: 28px;
+}
+.btn.add-to-cart-btn.added {
+    background-color: #f6c90e;
+    border-color: #f6c90e;
+    color: black;
+    font-weight: bold;
+    border-radius: 100%;
+}
+.tick-img {
+    width: 10px;
+}
+.cart-image{
+    width: 100px;
+    height: 100px;
+    transform: rotate(-30deg); /* Rotate the image by 45 degrees */
+}
+.cart-img-container{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-left: 0px;
+    justify-content: center;
+}
+.card-img-top.img-container{
+    transform: rotate(0deg); 
+}
+.cart-shoe-name{
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.quantity-btn{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color:#777777; 
+    border-color: #777777;
+    height: 28px;
+    width: 28px;
+    font-size: 28px;
+    border-radius: 50%;
+}
+
+@keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }

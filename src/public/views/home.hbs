@@ -1,0 +1,224 @@
+<div class='mt-4 position-relative'>
+
+    <!-- Card Container -->
+    <div class='container'>
+        <div class='row'>
+            <!-- First Card -->
+            <div class='col-md-6 d-flex justify-content-center'>
+                <div class='card'>
+                    <div class='our-product-title-container'>
+                        <img
+                            src='/assets/nike.png'
+                            alt=''
+                            class='mt-2 ml-1'
+                            style='max-width:20%; margin-left: 10px;'
+                        />
+                        <h2 class='card-title text-center mt-2'>Our Products</h2>
+                    </div>
+                        <div class='card-body-wrapper'>
+                            {{#each shoesData.shoes}}
+                                <div class='shoe-detail-container'>
+                                    <div class='card-body our-products'>
+                                        <div class="card-img-top img-container product-image" style='background-color:{{this.color}};'>
+                                            <img
+                                                class='card-img-top'
+                                                src={{this.image}}
+                                            />
+                                        </div>
+                                        
+                                        <div class='product-details'>
+                                            <p class='shoe-name text-center'>{{this.name}}</p>
+                                            <p class='shoe-detail'>
+                                                {{this.description}}</p>
+                                            <div
+                                                class='d-flex justify-content-between align-items-center'
+                                            >
+                                                <p class='price-tag'>${{this.price}}</p>
+                                                <button
+                                                    class='btn btn-primary add-to-cart-btn'
+                                                    onclick='addToCartBtnClick(this, {
+                                                        id: {{this.id}}, 
+                                                        name: "{{this.name}}",
+                                                        image: "{{this.image}}",
+                                                        price: {{this.price}},
+                                                        color: "{{this.color}}"
+                                                    })'
+                                                    index={{this.id}}
+                                                >
+                                                    Add to Cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                </div>
+            </div>
+            <!-- Second Card -->
+            <div class='col-md-6 d-flex justify-content-center'>
+                <div class='card'>
+                    <div class='your-cart-title-container'>
+                        <img
+                            src='/assets/nike.png'
+                            alt=''
+                            class='mt-2 ml-1'
+                            style='max-width:20%; margin-left: 10px;'
+                        />
+                        <div class='d-flex'>
+                            <p class='card-title mt-2' style="margin-left: 20px;">Your cart</p>
+                            <p class="total-count mt-2">$0</p>
+                        </div>
+                    </div>
+                    <div class='card-body-wrapper cart-items-container'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let totalCountNode = document.querySelector('.total-count');
+    let totalCount = 0;
+    let cartItemsContainer = document.querySelector('.cart-items-container')
+
+    function addToCartBtnClick(button, shoeData){ 
+        // convert btn to tick img, disable btn
+        button.innerHTML='<img src="/assets/check.png" alt="Tick" class="tick-img">'; 
+        button.classList.add('added');
+        button.classList.add(`add-to-cart-btn-${shoeData.id}`);
+        button.setAttribute('disabled', true)
+
+        renderNewCart(shoeData)
+    }
+    
+    function renderNewCart(shoeData){
+        let newElement = document.createElement("div");
+        newElement.setAttribute("id", `div${shoeData.id}`)
+        newElement.innerHTML = `
+            <div class='shoe-cart-container'>
+                <div class='card-body d-flex justify-content-start'>
+                    <div class="cart-img-container" style='background-color: ${shoeData.color};'>
+                        <img
+                            class='cart-image'
+                            src='${shoeData.image}'
+                        />
+                    </div>
+                    
+                    
+                    <div class="cart-item-details" style="animation-name: slidein; animation-duration: 1s;">
+                        <p class="cart-shoe-name" style="margin: 0%;">${shoeData.name}</p>
+                        <p class="shoe-name mt-2" style="margin: 0%;">$${shoeData.price}</p>
+                        <div class="d-flex mt-2">
+                            <button class="quantity-btn decrease-btn" 
+                                style="background-image: url('/assets/minus.png');" 
+                                onclick="decreaseQuantity(${shoeData.id}, ${shoeData.price})"
+                            ></button>
+                            <input class="item-count" 
+                                type="text"
+                                id = ${shoeData.id}
+                                style="text-align: center; border: none;" 
+                                value=1 
+                                size="1"
+                                onchange="inputChange(this)"
+                            >
+                            <button class="quantity-btn increase-btn" 
+                                style="background-image: url('/assets/plus.png');" 
+                                onclick="increaseQuantity(${shoeData.id}, ${shoeData.price})"
+                            ></button>
+                            <button class="btn btn-primary quantity-btn" 
+                                style="background-image: url('/assets/trash.png');
+                                    background-color: #F6C90E;
+                                    border-color: #F6C90E;
+                                    margin-left: 30px;
+                                    height: 28px;
+                                    width: 28px;
+                                    border-radius: 50%;
+                                " 
+                                onclick="removeItem(${shoeData.id}, ${shoeData.price})"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        cartItemsContainer.appendChild(newElement)
+        // recalculate total count
+        totalCount += shoeData.price
+        totalCountNode.innerHTML = `$${Math.round((totalCount + Number.EPSILON)*100)/100}`
+        anyItemInCart()
+
+    }
+
+    function increaseQuantity(id, price){
+        let itemCount = document.getElementById(id)
+        itemCount.value++
+        // recalculate total count
+        totalCount += price
+        totalCountNode.innerHTML = `$${Math.round((totalCount+ Number.EPSILON)*100)/100}`
+    }
+
+    function decreaseQuantity(id, price){
+        let itemElement = document.getElementById(`div${id}`)
+        let itemCount = document.getElementById(id)
+        
+        // recalculate total count
+        totalCount -= price
+        totalCountNode.innerHTML = `$${Math.round((totalCount + Number.EPSILON)*100)/100}`
+
+        // remove if decrease to 0, else decrease 1 to value
+        if (itemCount.value == 1) {
+            itemElement.remove()
+            // call after remove item func, also check if any item in cart
+            removedItem(id)
+            anyItemInCart()
+        }
+        else {
+            itemCount.value--
+            anyItemInCart()
+        }
+         
+
+    }
+    function inputChange(inputElement){
+        let itemElement = document.getElementById(`div${id}`)
+        let itemCount = document.getElementById(id)
+
+        if (itemCount.value == 0) itemElement.remove()
+        // call after remove item func, also check if any item in cart
+        removedItem(id)
+        anyItemInCart()
+    }
+
+    function removeItem(id, price){
+        let itemCount = document.getElementById(id)
+        let itemElement = document.getElementById(`div${id}`)
+
+        itemElement.remove()
+
+        // recalculate total count
+        totalCount -= price*itemCount.value
+        totalCountNode.innerHTML = `$${Math.round((totalCount + Number.EPSILON)*100)/100}`
+        // call after remove item func, also check if any item in cart
+        removedItem(id)
+        anyItemInCart()
+
+    }
+
+    // func occur when an item is remove from cart
+    function removedItem(id){
+        addToCartBtn = document.querySelector(`.add-to-cart-btn-${id}`)
+        addToCartBtn.innerHTML = 'Add to Cart'
+        addToCartBtn.disabled = false
+
+    }
+
+    // check if any item in cart => add text if none
+    function anyItemInCart(){
+        if (totalCount == 0) 
+            cartItemsContainer.innerHTML = '<p class="shoe-name empty-cart-text" style="text-align: center;">Your cart is empty.</p>'
+        else if (document.querySelector('.empty-cart-text')) document.querySelector('.empty-cart-text').remove()
+    }   
+    anyItemInCart()
+
+</script>
