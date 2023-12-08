@@ -3,7 +3,7 @@ const morgan = require('morgan'); // used to show request log whenever a request
 const path = require('path');
 var methodOverride = require('method-override');
 const handlebars = require('express-handlebars'); // used to create layout for web
-
+require('dotenv').config()
 //custom middleware
 const route = require('./src/routes/routesControl');
 const db = require('./src/config/db/index');
