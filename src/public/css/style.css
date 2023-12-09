@@ -24,6 +24,7 @@ body {
         #f6c90e 75%,
         transparent 75%
     );
+    background-attachment: fixed;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
