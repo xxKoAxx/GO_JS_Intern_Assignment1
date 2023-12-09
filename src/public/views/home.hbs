@@ -209,7 +209,7 @@
         addToCartBtn = document.querySelector(`.add-to-cart-btn-${id}`)
         addToCartBtn.innerHTML = 'Add to Cart'
         addToCartBtn.disabled = false
-
+        addToCartBtn.classList.remove('added')
     }
 
     // check if any item in cart => add text if none
