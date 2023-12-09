@@ -1,6 +1,7 @@
 .card {
     width: 300px;
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 28px !important;
     background: radial-gradient(
         ellipse at top left,
@@ -19,12 +20,17 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
+    padding: 0;
     background: radial-gradient(
         ellipse at 900% 100%,
         #f6c90e 75%,
         transparent 75%
     );
     background-attachment: fixed;
+}
+
+.container{
+    height: 100vh;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
