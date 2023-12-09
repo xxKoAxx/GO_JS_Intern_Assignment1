@@ -215,7 +215,7 @@
 
     // check if any item in cart => add text if none
     function anyItemInCart(){
-        if (totalCount == 0) 
+        if (Math.round(totalCount) === 0) 
             cartItemsContainer.innerHTML = '<p class="shoe-name empty-cart-text" style="text-align: center;">Your cart is empty.</p>'
         else if (document.querySelector('.empty-cart-text')) document.querySelector('.empty-cart-text').remove()
     }   
