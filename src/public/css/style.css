@@ -1,7 +1,6 @@
 .card {
     width: 300px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
     border-radius: 28px !important;
     background: radial-gradient(
         ellipse at top left,
