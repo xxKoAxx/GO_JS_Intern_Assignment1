@@ -146,7 +146,8 @@
         totalCount += shoeData.price
         totalCountNode.innerHTML = `$${Math.round((totalCount + Number.EPSILON)*100)/100}`
         anyItemInCart()
-
+        // scroll the new element to view
+        newElement.scrollIntoView({behavior:"smooth"})
     }
 
     function increaseQuantity(id, price){
